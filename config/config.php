@@ -22,8 +22,8 @@ class Config{
 
     }
 
-//insert student query into database
-    public function insertData($name,$age,$course){
+//insert student query into databasev
+        public function insertData($name,$age,$course){
          $query="INSERT INTO $this->table_name(name,age,course) VALUES('$name',$age,'$course')";
         $res = mysqli_query($this->conn,$query);
 
@@ -41,9 +41,31 @@ class Config{
    public function getStudentData(){
         $query = "SELECT * FROM $this->table_name";
         $res = mysqli_query($this->conn,$query);
-        print_r($res);
+
+//         while($row = mysqli_fetch_array($res)){
+//             $row = mysqli_fetch_array($res);
+//         print_r($row);
+//         echo "<br>";          
+//    }
+
+        return $res;
+
    }
 
+   //delete student query from database
+   public function deleteStudentData($id){
+        $query="DELETE FROM $this->table_name WHERE id=$id";
+        $res=mysqli_query($this->conn,$query);
+        print_r($res);
+        return $res;
+   }
+
+   //update student query from database
+   public function updateStudentData($id,$name,$age,$course){
+    $query="UPDATE $this->table_name SET name='$name',age='$age',course='$course' WHERE id=$id";
+    $res=mysqli_query($this->conn,$query);
+    return $res;
+   }
 
 }
 
